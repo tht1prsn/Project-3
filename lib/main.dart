@@ -1,8 +1,8 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
 import 'package:flutter/material.dart';
-import 'package:to_dont_list/objects/item.dart';
-import 'package:to_dont_list/widgets/to_do_items.dart';
-import 'package:to_dont_list/widgets/to_do_dialog.dart';
+import 'package:project_3/objects/item.dart';
+import 'package:project_3/widgets/to_do_items.dart';
+import 'package:project_3/widgets/to_do_dialog.dart';
 
 class ToDoList extends StatefulWidget {
   const ToDoList({super.key});
