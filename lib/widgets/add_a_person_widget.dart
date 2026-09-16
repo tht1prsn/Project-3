@@ -31,25 +31,26 @@ class _AddAPersonState extends State<AddAPersonWidget> {
       title: const Text('Information'),
       content: 
         ListView(
+          //circle avatar to hold person photo
+          //text field to add name
+          // button to add custom tags
+          // chips to select custom tags
+          // section for additional comments
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: 
-                Row(
-                  children: [
-                    TextField(
-                      onChanged: (value) {
-                        setState(() {
-                        valueText = value;
-                        });
-                      },
-                      controller: _inputController,
-                      decoration: const InputDecoration(hintText: "name"),
-                    ),
-                  ],
-                )
+            
+
+            Expanded(child:
+              TextField(
+                onChanged: (value) {
+                  setState(() {
+                  valueText = value;
+                  });
+                },
+                controller: _inputController,
+                decoration: const InputDecoration(hintText: "name"),
+              )
             )
-          ]
+          ],
         ),
       actions: <Widget>[
         // https://stackoverflow.com/questions/52468987/how-to-turn-disabled-button-into-enabled-button-depending-on-conditions

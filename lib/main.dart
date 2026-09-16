@@ -35,7 +35,7 @@ class _PersonListState extends State<PersonList> {
   void _handleNewItem(String personName, TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      Person newPerson = Person(name: personName, photo: null, additionalData: null, comment: null);
+      Person newPerson = Person(name: personName, photo: null, filters: null, comment: null, connections: null);
       items.insert(0, newPerson);
       textController.clear();
     });
@@ -45,7 +45,7 @@ class _PersonListState extends State<PersonList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('To Do List'),
+          title: const Text('Peopol Knower'),
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
