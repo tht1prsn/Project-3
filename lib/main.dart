@@ -32,10 +32,10 @@ class _PersonListState extends State<PersonList> {
     });
   }
 
-  void _handleNewItem(String personName, TextEditingController textController) {
+  void _handleNewItem(String personName, Color personColor, TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      Person newPerson = Person(name: personName, photo: null, filters: null, comment: null, connections: null);
+      Person newPerson = Person(name: personName, avatarColor: personColor, filters: null, comment: null, connections: null);
       items.insert(0, newPerson);
       textController.clear();
     });
@@ -47,16 +47,23 @@ class _PersonListState extends State<PersonList> {
         appBar: AppBar(
           title: const Text('Peopol Knower'),
         ),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          children: items.map((item) {
-            return PersonItem(
-              item: item,
-              onListChanged: _handleListChanged,
-              onDeleteItem: _handleDeleteItem,
-            );
-          }).toList(),
-        ),
+        body: 
+          Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  children: items.map((item) {
+                    return PersonItem(
+                      item: item,
+                      onListChanged: _handleListChanged,
+                      onDeleteItem: _handleDeleteItem,
+                    );
+                  }).toList(),
+                )
+              )
+            ],
+          ),
         floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () {

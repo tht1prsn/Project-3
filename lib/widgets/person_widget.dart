@@ -16,15 +16,6 @@ class PersonItem extends StatelessWidget {
   final PersonChangedCallback onListChanged;
   final PersonRemovedCallback onDeleteItem;
 
-    Color _getColor(BuildContext context) {
-    // The theme depends on the BuildContext because different
-    // parts of the tree can have different themes.
-    // The BuildContext indicates where the build is
-    // taking place and therefore which theme to use.
-
-    return Theme.of(context).primaryColor;
-  }
-
   TextStyle? _getTextStyle(BuildContext context) {
     return const TextStyle(
       color: Colors.black54,
@@ -40,8 +31,8 @@ class PersonItem extends StatelessWidget {
 
       },
       leading: CircleAvatar(
-        backgroundColor: _getColor(context),
-        child: Text(item.name),
+        backgroundColor: item.avatarColor,
+        child: Text(item.name.substring(0, 1)),
       ),
       title: Text(
         item.name,
