@@ -15,23 +15,21 @@ class _PersonListState extends State<PersonList> {
   final List<Person> items = [];
   final _itemSet = <Person>{};
 
+  TextEditingController searchController = TextEditingController();
+
+  String searchCriteria = "";
+
+
   void _handleListChanged(Person item) {
     setState(() {
-      // When a user changes what's in the list, you need
-      // to change _itemSet inside a setState call to
-      // trigger a rebuild.
-      // The framework then calls build, below,
-      // which updates the visual appearance of the app.
     });
   }
-
   void _handleDeleteItem(Person item) {
     setState(() {
       print("Deleting Entry");
       items.remove(item);
     });
   }
-
   void _handleNewItem(String personName, Color personColor, TextEditingController textController) {
     setState(() {
       print("Adding new item");
@@ -50,10 +48,36 @@ class _PersonListState extends State<PersonList> {
         body: 
           Column(
             children: [
+              SizedBox(
+                width: 300,
+                child: 
+                  SearchBar
+                  (
+                    controller: searchController,
+                    onChanged: (value) {
+                      setState(() {
+                        searchCriteria = value;
+                      });
+                    },
+                    trailing: <Widget>[
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            searchCriteria="";
+                            searchController.clear();
+                          });
+                        },
+                        icon: const Icon(Icons.cancel))
+                    ]
+                  ),
+              ),
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  children: items.map((item) {
+                  children: 
+                    items.where(
+                      (item) => item.name.toLowerCase().contains(searchCriteria)
+                    ).toList().map((item) {
                     return PersonItem(
                       item: item,
                       onListChanged: _handleListChanged,
@@ -78,7 +102,7 @@ class _PersonListState extends State<PersonList> {
 
 void main() {
   runApp(const MaterialApp(
-    title: 'To Do List',
+    title: 'Peopl Knower',
     home: PersonList(),
   ));
 }

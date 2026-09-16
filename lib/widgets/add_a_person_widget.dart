@@ -109,7 +109,7 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                       setState(() {
                         Navigator.pop(context);
                         //name, photo, extra, comment
-                        widget.onListAdded(valueText, pastelColors[colorIndex] as Color, _inputController);
+                        widget.onListAdded(valueText, pastelColors[colorIndex], _inputController);
                       });
                     }
                   : null,
