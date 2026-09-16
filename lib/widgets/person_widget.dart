@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_3/objects/person.dart';
+import 'package:project_3/widgets/person_info_widget.dart';
 
 typedef PersonChangedCallback = Function(Person item);
 typedef PersonRemovedCallback = Function(Person item);
@@ -25,10 +26,14 @@ class PersonItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-      },
       onLongPress: () {
-
+              showDialog(
+                  context: context,
+                  builder: (_)
+                  {
+                    return InfoCardWidget(item: item);
+                  }
+              );
       },
       leading: CircleAvatar(
         backgroundColor: item.avatarColor,

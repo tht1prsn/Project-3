@@ -76,7 +76,7 @@ class _PersonListState extends State<PersonList> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   children: 
                     items.where(
-                      (item) => item.name.toLowerCase().contains(searchCriteria)
+                      (item) => item.name.toLowerCase().contains(searchCriteria.toLowerCase())
                     ).toList().map((item) {
                     return PersonItem(
                       item: item,
