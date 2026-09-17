@@ -1,4 +1,6 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:project_3/objects/person.dart';
 import 'package:project_3/widgets/add_a_person_widget.dart';
@@ -12,7 +14,7 @@ class PersonList extends StatefulWidget {
 }
 
 class _PersonListState extends State<PersonList> {
-  final List<Person> items = [];
+  final HashMap<String, Person> items = HashMap();
   final _itemSet = <Person>{};
 
   TextEditingController searchController = TextEditingController();
@@ -20,21 +22,17 @@ class _PersonListState extends State<PersonList> {
   String searchCriteria = "";
 
 
-  void _handleListChanged(Person item) {
-    setState(() {
-    });
-  }
   void _handleDeleteItem(Person item) {
     setState(() {
       print("Deleting Entry");
-      items.remove(item);
+      items.remove(item.name);
     });
   }
   void _handleNewItem(String personName, Color personColor, TextEditingController textController) {
     setState(() {
       print("Adding new item");
       Person newPerson = Person(name: personName, avatarColor: personColor, filters: null, comment: null, connections: null);
-      items.insert(0, newPerson);
+      items[personName] = newPerson;
       textController.clear();
     });
   }
@@ -75,12 +73,11 @@ class _PersonListState extends State<PersonList> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   children: 
-                    items.where(
+                    items.values.toList().where(
                       (item) => item.name.toLowerCase().contains(searchCriteria.toLowerCase())
                     ).toList().map((item) {
                     return PersonItem(
                       item: item,
-                      onListChanged: _handleListChanged,
                       onDeleteItem: _handleDeleteItem,
                     );
                   }).toList(),
