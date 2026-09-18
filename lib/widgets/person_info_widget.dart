@@ -19,7 +19,10 @@ class InfoCardWidget extends StatelessWidget
 
   void replaceItem(String name, String comment, Color color, TextEditingController nameControl, TextEditingController commentControl)
   {
-    handleDeleteItem?.call(item);
+    if(item.name != name)
+    {
+      handleDeleteItem?.call(item);
+    }
     handleListAdded?.call(name, comment, color, nameControl, commentControl);
     updateInfo = true;
   }

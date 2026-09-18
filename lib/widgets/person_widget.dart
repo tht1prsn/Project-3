@@ -42,7 +42,7 @@ class PersonItem extends StatelessWidget {
           },
           leading: CircleAvatar(
             backgroundColor: item.avatarColor,
-            child: Text(item.name.substring(0, 1)),
+            child: Text(item.name.isNotEmpty? item.name.substring(0, 1) : ''),
           ),
           title: Text(
             item.name,

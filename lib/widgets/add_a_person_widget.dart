@@ -63,6 +63,9 @@ class _AddAPersonState extends State<AddAPersonWidget> {
     {
       _inputController = TextEditingController(text: widget.item?.name);
       _commentsController = TextEditingController(text: widget.item?.comment);
+      valueText = _inputController.value.text;
+      commentText = _commentsController.value.text;
+
     }
   }
 
@@ -103,7 +106,7 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                   onPressed: () {
                     setState(() {
                       colorIndex += 1;
-                      if(colorIndex > pastelColors.length) {
+                      if(colorIndex > pastelColors.length-1) {
                         colorIndex = 0;
                       }
                     });

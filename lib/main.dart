@@ -86,14 +86,16 @@ class _PersonListState extends State<PersonList> {
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  children: 
-                    items.values.toList().where(
-                      (item) => item.name.toLowerCase().contains(searchCriteria.toLowerCase())
-                    ).toList().map((item) {
-                    return PersonItem(
-                      item: item,
-                    );
-                  }).toList(),
+                  children:  
+                      items.values.where
+                      ((item) => item.name.toLowerCase().contains(searchCriteria.toLowerCase())
+                      ).toList().map((item) 
+                      {
+                        return PersonItem
+                        (
+                          item: item,
+                        );
+                      }).toList(),
                 )
               )
             ],
