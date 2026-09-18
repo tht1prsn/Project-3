@@ -28,12 +28,13 @@ class _PersonListState extends State<PersonList> {
       items.remove(item.name);
     });
   }
-  void _handleNewItem(String personName, Color personColor, TextEditingController textController) {
+  void _handleNewItem(String personName, String comment, Color personColor, TextEditingController textController, TextEditingController commentsController){
     setState(() {
       print("Adding new item");
-      Person newPerson = Person(name: personName, avatarColor: personColor, filters: null, comment: null, connections: null);
+      Person newPerson = Person(name: personName, avatarColor: personColor, filters: null, comment: comment, connections: null);
       items[personName] = newPerson;
       textController.clear();
+      commentsController.clear();
     });
   }
 

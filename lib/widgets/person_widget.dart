@@ -28,7 +28,7 @@ class PersonItem extends StatelessWidget {
                   context: context,
                   builder: (_)
                   {
-                    return InfoCardWidget(item: item);
+                    return InfoCardWidget(item: item, onPersonRemove: onDeleteItem,);
                   }
               );
       },

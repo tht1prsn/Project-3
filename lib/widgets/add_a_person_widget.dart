@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 typedef PersonAddedCallback = Function(
-    String value, Color personColor, TextEditingController textConroller);
+    String value, String comment, Color personColor, TextEditingController textConroller, TextEditingController commentsController);
 
 class AddAPersonWidget extends StatefulWidget {
   const AddAPersonWidget({
@@ -17,6 +17,7 @@ class AddAPersonWidget extends StatefulWidget {
 class _AddAPersonState extends State<AddAPersonWidget> {
   // Dialog with text from https://www.appsdeveloperblog.com/alert-dialog-with-a-text-field-in-flutter/
   final TextEditingController _inputController = TextEditingController();
+  final TextEditingController _commentsController = TextEditingController();
   final ButtonStyle yesStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), backgroundColor: Colors.grey);
   final ButtonStyle noStyle = ElevatedButton.styleFrom(
@@ -38,6 +39,7 @@ class _AddAPersonState extends State<AddAPersonWidget> {
   const Color(0xFFDDEBF7), // Light Sky
   ];
   String valueText = "";
+  String commentText = "";
   int colorIndex = 0;
 
 
@@ -49,8 +51,9 @@ class _AddAPersonState extends State<AddAPersonWidget> {
         ListView(
           //circle avatar to hold person photo
           //text field to add name
-          // button to add custom tags
           // chips to select custom tags
+            // button to add custom tags
+          // chips to select people connnections from current list
           // section for additional comments
           children: [
             Row
@@ -63,7 +66,9 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                     setState(() {
                       colorIndex -= 1;
                       if(colorIndex < 0)
+                      {
                         colorIndex = pastelColors.length-1;
+                      }
                     });
                   },
                   icon: const Icon(Icons.arrow_left)
@@ -75,8 +80,9 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                   onPressed: () {
                     setState(() {
                       colorIndex += 1;
-                      if(colorIndex > pastelColors.length)
+                      if(colorIndex > pastelColors.length) {
                         colorIndex = 0;
+                      }
                     });
                   },
                   icon: const Icon(Icons.arrow_right)
@@ -93,7 +99,27 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                 controller: _inputController,
                 decoration: const InputDecoration(hintText: "name"),
               )
+            ),
+
+
+            //comments text field
+            Expanded(
+              child: TextField(
+                controller: _commentsController,
+                onChanged: (value) {
+                  setState(() {
+                    commentText = value;
+                  });
+                },
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                minLines: 1,
+                decoration: InputDecoration(
+                  hintText: "Comments for contact"
+                ),
+              ),
             )
+            //https://stackoverflow.com/questions/45900387/multi-line-textfield-in-flutter
           ],
         ),
       actions: <Widget>[
@@ -109,7 +135,7 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                       setState(() {
                         Navigator.pop(context);
                         //name, photo, extra, comment
-                        widget.onListAdded(valueText, pastelColors[colorIndex], _inputController);
+                        widget.onListAdded(valueText, commentText, pastelColors[colorIndex], _inputController, _commentsController);
                       });
                     }
                   : null,
