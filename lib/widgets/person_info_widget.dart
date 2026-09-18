@@ -77,11 +77,16 @@ class InfoCardWidget extends StatelessWidget
 
 
             Text("Comments:"),
-            Text(
-              item.comment ?? "",
-              softWrap: true,
-              overflow: TextOverflow.ellipsis,
-            ),
+            SizedBox(
+              width: 200,
+              height: null,
+              child:
+                Text(
+                  item.comment ?? "",
+                  maxLines: null,
+                  softWrap: true,
+                ),
+            )
             //comments (Always Last)
             
           ],
