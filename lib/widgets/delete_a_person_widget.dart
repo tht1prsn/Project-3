@@ -30,6 +30,7 @@ class DeletePerson extends StatelessWidget {
           title: const Text('Delete entry'),
           content: 
             ElevatedButton(
+              key: Key("ConfirmDelete"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white

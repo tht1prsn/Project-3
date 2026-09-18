@@ -29,10 +29,6 @@ class InfoCardWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    if(updateInfo)
-    {
-      
-    }
     return AlertDialog(
       title: 
         Row(
@@ -68,7 +64,7 @@ class InfoCardWidget extends StatelessWidget
           ]
         ),
       content:
-        ListView(
+        Column(
           children: [
             Row(
               spacing: 12.0,
@@ -81,13 +77,11 @@ class InfoCardWidget extends StatelessWidget
 
 
             Text("Comments:"),
-            Expanded(
-              child: Text(
-                item.comment ?? "",
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-              ),
-            )
+            Text(
+              item.comment ?? "",
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+            ),
             //comments (Always Last)
             
           ],

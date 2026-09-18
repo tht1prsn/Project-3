@@ -74,7 +74,7 @@ class _AddAPersonState extends State<AddAPersonWidget> {
     return AlertDialog(
       title: const Text('Information'),
       content: 
-        ListView(
+        Column(
           //circle avatar to hold person photo
           //text field to add name
           // chips to select custom tags
@@ -115,8 +115,9 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                 )
               ],
             ),
-            Expanded(child:
+            
               TextField(
+                key: Key("NameField"),
                 onChanged: (value) {
                   setState(() {
                   valueText = value;
@@ -124,13 +125,11 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                 },
                 controller: _inputController,
                 decoration: const InputDecoration(hintText: "name"),
-              )
-            ),
+              ),
 
 
             //comments text field
-            Expanded(
-              child: TextField(
+              TextField(
                 controller: _commentsController,
                 onChanged: (value) {
                   setState(() {
@@ -142,7 +141,6 @@ class _AddAPersonState extends State<AddAPersonWidget> {
                 minLines: 1,
                 decoration: InputDecoration(
                   hintText: "Comments for contact"
-                ),
               ),
             )
             //https://stackoverflow.com/questions/45900387/multi-line-textfield-in-flutter
