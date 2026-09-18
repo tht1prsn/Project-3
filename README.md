@@ -7,7 +7,7 @@ Built specifically to be an efficient list of contact info instead of bumbling a
 
 (Future updates may include adding filters and connections to better see how the people you know are *connected* as well as a separate graph view to visualize those connections)
 
-![Base App](Screenshots/Adding.png)
+![Base App](Screenshots/Base.png)
 ![Adding a contact](Screenshots/Adding.png)
 ![Adding a contact with another color](Screenshots/AddingAnotherColor.png)
 ![Showing wrapped text in info card](Screenshots/InfoWithWrappedText.png)
