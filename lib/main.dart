@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:project_3/objects/person.dart';
 import 'package:project_3/widgets/add_a_person_widget.dart';
+import 'package:project_3/widgets/delete_a_person_widget.dart';
 import 'package:project_3/widgets/person_widget.dart';
 import 'package:project_3/widgets/person_info_widget.dart';
 
@@ -17,7 +18,6 @@ class PersonList extends StatefulWidget {
 
 class _PersonListState extends State<PersonList> {
   final HashMap<String, Person> items = HashMap();
-  final _itemSet = <Person>{};
 
   TextEditingController searchController = TextEditingController();
 
@@ -30,6 +30,8 @@ class _PersonListState extends State<PersonList> {
 
     InfoCardWidget.handleListAdded = _handleNewItem;
     InfoCardWidget.handleDeleteItem = _handleDeleteItem;
+
+    DeletePerson.handleDeleteItem = _handleDeleteItem;
   }
 
 
@@ -90,7 +92,6 @@ class _PersonListState extends State<PersonList> {
                     ).toList().map((item) {
                     return PersonItem(
                       item: item,
-                      onDeleteItem: _handleDeleteItem,
                     );
                   }).toList(),
                 )

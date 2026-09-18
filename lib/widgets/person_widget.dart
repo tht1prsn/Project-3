@@ -3,17 +3,12 @@ import 'package:project_3/objects/person.dart';
 import 'package:project_3/widgets/person_info_widget.dart';
 import 'package:project_3/widgets/delete_a_person_widget.dart';
 
-typedef PersonRemovedCallback = Function(Person item);
-
 class PersonItem extends StatelessWidget {
   PersonItem(
-      {required this.item,
-      required this.onDeleteItem})
+      {required this.item,})
       : super(key: ObjectKey(item));
 
   final Person item;
-
-  final PersonRemovedCallback onDeleteItem;
 
   TextStyle? _getTextStyle(BuildContext context) {
     return const TextStyle(
@@ -42,7 +37,7 @@ class PersonItem extends StatelessWidget {
           onLongPress: () {
             showDialog(context: context, builder: (_)
             {
-              return DeletePerson(item: item, onDeleteItem: onDeleteItem(item),);
+              return DeletePerson(item: item);
             });
           },
           leading: CircleAvatar(
