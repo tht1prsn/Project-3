@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:project_3/objects/person.dart';
 import 'package:project_3/widgets/add_a_person_widget.dart';
 import 'package:project_3/widgets/person_widget.dart';
+import 'package:project_3/widgets/person_info_widget.dart';
+
 
 class PersonList extends StatefulWidget {
   const PersonList({super.key});
@@ -20,6 +22,15 @@ class _PersonListState extends State<PersonList> {
   TextEditingController searchController = TextEditingController();
 
   String searchCriteria = "";
+
+  @override
+  void initState()
+  {
+    super.initState();
+
+    InfoCardWidget.handleListAdded = _handleNewItem;
+    InfoCardWidget.handleDeleteItem = _handleDeleteItem;
+  }
 
 
   void _handleDeleteItem(Person item) {

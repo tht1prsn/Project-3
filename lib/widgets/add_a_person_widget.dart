@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:project_3/objects/person.dart';
 
 typedef PersonAddedCallback = Function(
     String value, String comment, Color personColor, TextEditingController textConroller, TextEditingController commentsController);
 
 class AddAPersonWidget extends StatefulWidget {
-  const AddAPersonWidget({
+  AddAPersonWidget({
     super.key,
     required this.onListAdded,
+     this.item,
   });
+
+
+  final Person? item;
   final PersonAddedCallback onListAdded;
 
   @override
@@ -15,9 +20,16 @@ class AddAPersonWidget extends StatefulWidget {
 }
 
 class _AddAPersonState extends State<AddAPersonWidget> {
+
+  
+
+
+
   // Dialog with text from https://www.appsdeveloperblog.com/alert-dialog-with-a-text-field-in-flutter/
-  final TextEditingController _inputController = TextEditingController();
-  final TextEditingController _commentsController = TextEditingController();
+  TextEditingController _inputController = TextEditingController();
+  TextEditingController _commentsController = TextEditingController();
+
+
   final ButtonStyle yesStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), backgroundColor: Colors.grey);
   final ButtonStyle noStyle = ElevatedButton.styleFrom(
@@ -38,10 +50,21 @@ class _AddAPersonState extends State<AddAPersonWidget> {
   const Color(0xFFFFD6A5), // Light Orange
   const Color(0xFFDDEBF7), // Light Sky
   ];
-  String valueText = "";
-  String commentText = "";
   int colorIndex = 0;
 
+  String valueText = "";
+  String commentText = "";
+  @override
+  void initState()
+  {
+    super.initState();
+
+    if(widget.item != null)
+    {
+      _inputController = TextEditingController(text: widget.item?.name);
+      _commentsController = TextEditingController(text: widget.item?.comment);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,11 +155,10 @@ class _AddAPersonState extends State<AddAPersonWidget> {
               style: yesStyle,
               onPressed: value.text.isNotEmpty
                   ? () {
-                      setState(() {
-                        Navigator.pop(context);
+
                         //name, photo, extra, comment
                         widget.onListAdded(valueText, commentText, pastelColors[colorIndex], _inputController, _commentsController);
-                      });
+                        Navigator.pop(context, true);
                     }
                   : null,
               child: const Text('Save'),

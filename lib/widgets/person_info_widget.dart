@@ -2,24 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:project_3/objects/person.dart';
 import 'package:project_3/widgets/add_a_person_widget.dart';
 
-typedef RemovePersonCallback = Function(Person item);
+
 
 class InfoCardWidget extends StatelessWidget
 {
   Person item;
   InfoCardWidget({
     required this.item,
-    required this.onPersonRemove,
     super.key
   });
+  bool updateInfo = false;
 
-  final RemovePersonCallback onPersonRemove;
+  static void Function(Person item)? handleDeleteItem;
+  static void Function(String name, String comment, Color color, TextEditingController nameControl, TextEditingController commentControl)? handleListAdded;
 
+
+  void replaceItem(String name, String comment, Color color, TextEditingController nameControl, TextEditingController commentControl)
+  {
+    handleDeleteItem?.call(item);
+    handleListAdded?.call(name, comment, color, nameControl, commentControl);
+    updateInfo = true;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    if(updateInfo)
+    {
       
+    }
+    return AlertDialog(
       title: 
         Row(
           children: 
@@ -37,11 +48,18 @@ class InfoCardWidget extends StatelessWidget
                 alignment: Alignment.centerRight,
                 child: TextButton
                 (
-                  onPressed: () {
-                    onPersonRemove(item);
-                    Navigator.pop(context);
+                  onPressed: () async {
+                    final result = await showDialog<bool>(
+                      context: context,
+                      builder: (_) {
+                      return AddAPersonWidget(onListAdded: replaceItem, item: item);
+                    });
+
+                    if(result == true) {
+                      Navigator.of(context).pop();
+                    }
                   },
-                  child: const Text("Delete"))
+                  child: const Text("Edit"))
               )
             )
           ]
@@ -59,6 +77,7 @@ class InfoCardWidget extends StatelessWidget
 
 
 
+            Text("Comments:"),
             Expanded(
               child: Text(
                 item.comment ?? "",
